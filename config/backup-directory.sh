@@ -6,3 +6,4 @@ shed project:backup:directories \
     --s3-secret=$S3_ACCESS_SECRET \
     --s3-bucket=$S3_BUCKET \
     --directory=$DIRECTORY \
+    --exclude=$EXCLUDE
