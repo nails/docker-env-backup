@@ -1,5 +1,5 @@
 # Update the backup tool periodically (weekly on a Sunday at 2am)
-0 2 * * 0 cd ~/shed-cli-tool && git pull
+0 2 * * * cd ~/shed-cli-tool && git pull
 
 # The backup schedule (every day at 3am)
 0 3 * * * /backup/database.sh >> "/var/log/backup-database-$(date +"%F").log"
