@@ -1,0 +1,10 @@
+# Client defaults for mysqldump (MariaDB client) talking to the project's
+# database container over the private Docker network.
+#
+# Since MariaDB 11.4 the client verifies the server's TLS certificate by
+# default. MySQL 8 servers (nails/docker-env-db) use an auto-generated
+# self-signed certificate, which fails that check and aborts every dump with
+# "TLS/SSL error: self-signed certificate". The connection is still
+# encrypted; only verification of the self-signed certificate is skipped.
+[client]
+ssl-verify-server-cert=OFF
