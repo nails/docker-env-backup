@@ -2,6 +2,10 @@
 
 These Dockerfiles build a container which is responsible for running database and file system backups.
 
+Base image: `php:8.5-cli-alpine3.24`. Backups are run by the [Shed CLI](https://github.com/shedcollective/shed-cli-tool), which uses `mysqldump` (from `mariadb-client`), `tar` and `s3cmd`.
+
+`config/mariadb-client.cnf` turns off TLS certificate verification for the MariaDB client. Since MariaDB 11.4 the client verifies by default, and the MySQL 8 database container's self-signed certificate would fail that check.
+
 ## Tags
 
 - `nails/docker-env-backup:latest` — published for `linux/amd64` and `linux/arm64`
