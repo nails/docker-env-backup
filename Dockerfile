@@ -10,12 +10,15 @@ RUN chmod 755 /entry.sh /backup/database.sh /backup/directory.sh && \
     /usr/bin/crontab /crontab && \
     # Install: dependencies
     #   mariadb-client provides mysqldump; s3cmd (community) pulls in python3
+    #   mariadb-connector-c provides the caching_sha2_password auth plugin,
+    #   the only login method MySQL 8.4 enables by default
     apk upgrade --no-cache && \
     apk add --no-cache \
         bash \
         git \
         libzip \
         mariadb-client \
+        mariadb-connector-c \
         s3cmd \
         unzip \
         zip && \
@@ -29,6 +32,7 @@ RUN chmod 755 /entry.sh /backup/database.sh /backup/directory.sh && \
     # Sanity check: everything the backup commands call is present
     php -m | grep -qx zip && \
     command -v mysqldump && \
+    find /usr/lib -name caching_sha2_password.so | grep -q . && \
     command -v s3cmd && \
     command -v tar && \
     shed --version
